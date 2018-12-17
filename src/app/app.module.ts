@@ -7,6 +7,7 @@ import { APP_ROUTES } from './app.routes';
 // Modules
 import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 // Components
 import { AppComponent } from './app.component';
@@ -23,7 +24,8 @@ import { RegisterComponent } from './login/register.component';
     BrowserModule,
     APP_ROUTES,
     PagesModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
