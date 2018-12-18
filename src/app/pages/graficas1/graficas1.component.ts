@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-graphic1',
-  templateUrl: './graphic1.component.html',
+  selector: 'app-graficas1',
+  templateUrl: './graficas1.component.html',
   styles: []
 })
-export class Graphic1Component implements OnInit {
-  public doughnutChartLabels: string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
-  public doughnutChartData: number[] = [350, 450, 100];
-  public doughnutChartType: string = 'doughnut';
+export class Graficas1Component implements OnInit {
+
 
   graficos: any = {
     'grafico1': {
@@ -36,7 +34,7 @@ export class Graphic1Component implements OnInit {
       'leyenda': '¿Le importa que le den gases?'
     },
   };
-  
+
   constructor() { }
 
   ngOnInit() {

@@ -1,45 +1,47 @@
+
 import { NgModule } from '@angular/core';
-
-// Modules
-import { SharedModule } from '../shared/shared.module';
-import { FormsModule } from '@angular/forms';
-
-// Routes
 import { PAGES_ROUTES } from './pages.routes';
 
-// Modules
+import { SharedModule } from '../shared/shared.module';
+
+import { FormsModule } from '@angular/forms';
+
+
+// ng2-charts
 import { ChartsModule } from 'ng2-charts';
 
-// Components
 import { PagesComponent } from './pages.component';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { Graphic1Component } from './graphic1/graphic1.component';
 import { ProgressComponent } from './progress/progress.component';
-// Temporal
+import { Graficas1Component } from './graficas1/graficas1.component';
+
+
+// temporal
 import { IncrementerComponent } from '../components/incrementer/incrementer.component';
 import { DoughnutchartComponent } from '../components/doughnutchart/doughnutchart.component';
+import { AccoutSettingsComponent } from './accout-settings/accout-settings.component';
 
 @NgModule({
     declarations: [
         PagesComponent,
         DashboardComponent,
         ProgressComponent,
-        Graphic1Component,
+        Graficas1Component,
         IncrementerComponent,
-        DoughnutchartComponent
+        DoughnutchartComponent,
+        AccoutSettingsComponent
+    ],
+    exports: [
+        DashboardComponent,
+        ProgressComponent,
+        Graficas1Component
     ],
     imports: [
         SharedModule,
         PAGES_ROUTES,
         FormsModule,
         ChartsModule
-    ],
-    exports: [
-        PagesComponent,
-        DashboardComponent,
-        ProgressComponent,
-        Graphic1Component
-    ],
-    providers: [],
+    ]
 })
 export class PagesModule { }

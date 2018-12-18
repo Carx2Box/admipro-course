@@ -3,36 +3,43 @@
         <div class="card">
             <div class="card-body">
 
-                <h4 class="card-title">Progress bar</h4>
+                <h4 class="card-title">Barra de progreso {{ progreso1 }} </h4>
 
                 <div class="progress">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [attr.aria-valuenow]="progress1" aria-valuemin="0" aria-valuemax="100" [style.width]="progress1 + '%'"></div>
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [attr.ariaValuenow]="progreso1" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width]="progreso1 + '%'"></div>
                 </div>
 
                 <br>
 
                 <div class="progress">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" [attr.aria-valuenow]="progress2" aria-valuemin="0" aria-valuemax="100" [style.width]="progress2 + '%'"></div>
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" [attr.ariaValuenow]="progreso2" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" [style.width]="progreso2 + '%'"></div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+
+    <div class="col-6">
         <div class="card">
             <div class="card-body">
-                <app-incrementer nombre="Leyenda Azul" [progress]="progress1" (changeValue)="progress1 = $event"></app-incrementer>
+
+                <app-incrementer (changeValue)="progreso1 = $event" nombre="Progress Azul" [progress]="progreso1"></app-incrementer>
+
             </div>
         </div>
     </div>
 
-    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+    <div class="col-6">
         <div class="card">
             <div class="card-body">
-                <app-incrementer nombre="Leyenda Verde" [progress]="progress2" (changeValue)="progress2 = $event"></app-incrementer>
+
+                <app-incrementer (changeValue)="progreso2 = $event" nombre="Progress Verde" [progress]="progreso2"></app-incrementer>
+
             </div>
         </div>
     </div>
+
 </div>
