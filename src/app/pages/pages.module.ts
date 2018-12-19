@@ -21,6 +21,8 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 import { IncrementerComponent } from '../components/incrementer/incrementer.component';
 import { DoughnutchartComponent } from '../components/doughnutchart/doughnutchart.component';
 import { AccoutSettingsComponent } from './accout-settings/accout-settings.component';
+import { PromesasComponent } from './promesas/promesas.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +32,9 @@ import { AccoutSettingsComponent } from './accout-settings/accout-settings.compo
         Graficas1Component,
         IncrementerComponent,
         DoughnutchartComponent,
-        AccoutSettingsComponent
+        AccoutSettingsComponent,
+        PromesasComponent,
+        RxjsComponent
     ],
     exports: [
         DashboardComponent,
