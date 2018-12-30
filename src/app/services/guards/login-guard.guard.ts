@@ -1,4 +1,4 @@
-import { Injectable, ComponentFactoryResolver } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { UserService } from '../user/user.service';
 
@@ -12,13 +12,13 @@ export class LoginGuardGuard implements CanActivate {
     public userService: UserService,
     public router: Router) {}
 
-  canActivate(): boolean {    
-    const activate: boolean = this.userService.isLogged()
+  canActivate(): boolean {
+    const activate: boolean = this.userService.isLogged();
 
     if (!activate) {
       this.router.navigate(['/login']);
     }
-    
-    return activate;    
+
+    return activate;
   }
 }

@@ -6,18 +6,18 @@ import { URL_SERVICES } from '../config/config';
 })
 export class ImagePipe implements PipeTransform {
 
-  transform(image: any, type: string ='users'): any {  
+  transform(image: string, type: string = 'users'): any {
 
-    let url= URL_SERVICES +"/img"
+    const url = URL_SERVICES + '/img';
 
     if (!image) {
-      return url +'/users/xxxxxxxxxxxx';
+      return url + '/users/_user_test_';
     }
 
-    if (image.indexof('https') >= 0) {
+    if (image.indexOf('https') >= 0) {
       return image;
     }
 
-    return `${url}/${type}/${image}`;    
+    return `${url}/${type}/${image}`;
   }
 }

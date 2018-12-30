@@ -8,11 +8,12 @@ import { AccoutSettingsComponent } from './accout-settings/accout-settings.compo
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { LoginGuardGuard } from '../services/service.index';
+import { ProfileComponent } from './profile/profile.component';
 
 const pagesRoutes: Routes = [
     {
         path: '',
-        component: PagesComponent,        
+        component: PagesComponent,
         canActivate: [LoginGuardGuard],
         children: [
             { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard' } },
@@ -20,6 +21,7 @@ const pagesRoutes: Routes = [
             { path: 'graficas1', component: Graficas1Component, data: { title: 'Gráficas' } },
             { path: 'promesas', component: PromesasComponent, data: { title: 'Promesas' } },
             { path: 'rxjs', component: RxjsComponent, data: { title: 'RxJs' } },
+            { path: 'profile', component: ProfileComponent, data: { title: 'Profile' } },
             { path: 'account-settings', component: AccoutSettingsComponent, data: { title: 'Ajustes del Tema' } },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
         ]

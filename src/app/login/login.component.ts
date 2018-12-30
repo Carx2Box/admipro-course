@@ -5,7 +5,7 @@ import { User } from '../models/user.model';
 import { UserService } from '../services/service.index';
 import { GOOGLE_CLIENT_ID } from '../config/config';
 
-declare function init_plugins ();
+declare function init_plugins();
 declare const gapi: any;
 
 @Component({
@@ -18,21 +18,19 @@ export class LoginComponent implements OnInit {
   rememberpass: boolean = false;
   auth2: any;
 
-  constructor(
-    public userService: UserService,
-    private router: Router) { }
+  constructor(public userService: UserService, private router: Router) {}
 
   ngOnInit() {
     init_plugins();
     this.googleInit();
     this.email = localStorage.getItem('email') || '';
-    if (this.email.length >1) {
+    if (this.email.length > 1) {
       this.rememberpass = true;
-    }   
+    }
   }
 
   googleInit() {
-    gapi.load('auth2', ()=> {
+    gapi.load('auth2', () => {
       this.auth2 = gapi.auth2.init({
         client_id: GOOGLE_CLIENT_ID,
         cookiepolicy: 'single_host_origin',
@@ -40,29 +38,27 @@ export class LoginComponent implements OnInit {
       });
 
       this.attachSignin(document.getElementById('btnGoogle'));
-
     });
   }
 
   attachSignin(element) {
-    this.auth2.attachClickHandler(element,{}, (googleUser)=> {  
-
-      const token = googleUser.getAuthResponse().id_token;      
-      this.userService.loginGoogle(token).subscribe( ()=>  window.location.href='#/dashboard');
+    this.auth2.attachClickHandler(element, {}, googleUser => {
+      const token = googleUser.getAuthResponse().id_token;
+      this.userService
+        .loginGoogle(token)
+        .subscribe(() => (window.location.href = '#/dashboard'));
     });
   }
 
   login(f: NgForm) {
-
     if (f.invalid) {
       return;
     }
 
-    const user= new User(
-      null, 
-      f.value.email, 
-      f.value.password);
+    const user = new User(null, f.value.email, f.value.password);
 
-      this.userService.login(user, this.rememberpass).subscribe( (correct)=> this.router.navigate(['/dashboard']) );
+    this.userService
+      .login(user, this.rememberpass)
+      .subscribe(correct => this.router.navigate(['/dashboard']));
   }
 }

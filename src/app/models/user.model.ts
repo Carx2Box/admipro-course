@@ -1,6 +1,6 @@
 
 // Define a model user
-export class User{
+export class User {
     constructor(
         public name: string,
         public email: string,
@@ -9,6 +9,6 @@ export class User{
         public role?: string,
         public google: boolean= false,
         public _id?: string
-        ){
+        ) {
         }
 }
