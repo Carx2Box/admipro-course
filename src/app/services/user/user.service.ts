@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/internal/operators/map';
+import swal from 'sweetalert';
 
 // Models
 import { User } from 'src/app/models/user.model';
@@ -11,7 +12,6 @@ import { URL_SERVICES } from 'src/app/config/config';
 
 // Maps component
 import { UploadFileService } from '../upload/upload-file.service';
-import swal from 'sweetalert';
 
 @Injectable({
   providedIn: 'root'
@@ -46,14 +46,45 @@ export class UserService {
     }));
   }
 
+  // Get Users
+  retrieveUsers(from: number = 0) {
+    const url = URL_SERVICES + `/user?fromRows=${from}`;
+
+    return this.http.get(url);
+  }
+
+  // Remove user
+  removeUser(user: User) {
+    const url = URL_SERVICES + `/user/${user._id}`;
+    const httpParams = new HttpParams().set('token',  this.token);
+
+    return this.http.delete(url, { params: httpParams})
+      .pipe(map(resp =>  {
+        if (resp) {
+          return true;
+        }
+      }));
+  }
+
+  // Search for name
+  retrieveUserForName(term: string) {
+    const url = URL_SERVICES + `/search/collection/users/${encodeURIComponent(term)}`;
+
+    return this.http.get(url)
+      .pipe(map( (resp: any) =>  resp.users ));
+  }
+
   // Update user
   updateUser( user: User) {
-    const url = `${URL_SERVICES}/user/${this.user._id}`;
+    const url = `${URL_SERVICES}/user/${encodeURIComponent(user._id)}`;
     const httpParams = new HttpParams().set('token',  this.token);
     const token = this.token;
 
-    return this.http.put(url, user, { params: httpParams}).pipe(map((resp: any) => {
-      this.saveToLocalStorage(user._id, token, user);
+    return this.http.put(url, user, { params: httpParams}).pipe(map((resp: any) =>  {
+
+      if (user._id === this.user._id) {
+        this.saveToLocalStorage(user._id, token, user);
+      }
       return resp.user;
     }));
   }

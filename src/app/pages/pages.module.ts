@@ -21,6 +21,8 @@ import { AccoutSettingsComponent } from './accout-settings/accout-settings.compo
 import { PromesasComponent } from './promesas/promesas.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
+import { UsersComponent } from './users/users.component';
 
 import { PipesModule } from '../pipes/pipes.module';
 
@@ -35,7 +37,9 @@ import { PipesModule } from '../pipes/pipes.module';
         AccoutSettingsComponent,
         PromesasComponent,
         RxjsComponent,
-        ProfileComponent
+        ProfileComponent,
+        UsersComponent,
+        ModalUploadComponent
     ],
     exports: [
         DashboardComponent,

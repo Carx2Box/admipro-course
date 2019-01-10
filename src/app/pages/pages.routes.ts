@@ -9,6 +9,7 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { LoginGuardGuard } from '../services/service.index';
 import { ProfileComponent } from './profile/profile.component';
+import { UsersComponent } from './users/users.component';
 
 const pagesRoutes: Routes = [
     {
@@ -17,12 +18,15 @@ const pagesRoutes: Routes = [
         canActivate: [LoginGuardGuard],
         children: [
             { path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard' } },
-            { path: 'progress', component: ProgressComponent, data: { title: 'Progresos' } },
-            { path: 'graficas1', component: Graficas1Component, data: { title: 'Gráficas' } },
-            { path: 'promesas', component: PromesasComponent, data: { title: 'Promesas' } },
+            { path: 'progress', component: ProgressComponent, data: { title: 'Progress' } },
+            { path: 'graphics1', component: Graficas1Component, data: { title: 'Gráficas' } },
+            { path: 'promises', component: PromesasComponent, data: { title: 'Promesas' } },
             { path: 'rxjs', component: RxjsComponent, data: { title: 'RxJs' } },
             { path: 'profile', component: ProfileComponent, data: { title: 'Profile' } },
-            { path: 'account-settings', component: AccoutSettingsComponent, data: { title: 'Ajustes del Tema' } },
+            { path: 'account-settings', component: AccoutSettingsComponent, data: { title: 'Custom Theme' } },
+            // Admin
+            { path: 'users', component: UsersComponent, data: { title: 'Users' } },
+            // Default
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
         ]
     }

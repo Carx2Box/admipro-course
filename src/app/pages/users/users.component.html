@@ -1,0 +1,78 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-10">
+                        <input #input (keyup)="searchUsers( input.value)" type="text" class="form-control" placeholder="Search user...">
+                    </div>
+
+                    <div class="col-2">
+                        <button type="button" class="btn btn-danger" (click)="input.value = null; searchUsers( input.value) ">  Clean </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="loadingPage">
+    <div class="col-12">
+        <div class="alert alert-warning text-center">
+            <strong>Loading</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor.</span>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!loadingPage">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title"> Registered Users ( <small>{{this.totalRecords}}</small>) </h3>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Email</th>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Auth</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let user of users">
+                            <td class="w70"> <img (click)="showModal( user._id)" [src]="user.img | image:'users' " alt="" class="w70 img-circle pointer"> </td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.name }}</td>
+                            <td>
+                                <select [(ngModel)]="user.role" name="role" class="form-control">                                    
+                                    <option value="ADMIN_ROLE">Admin</option>
+                                    <option value="USER_ROLE">User</option>
+                                </select>
+                            </td>
+                            <td>
+                                <label *ngIf="user.google" class="label label-danger">Google</label>
+                                <label *ngIf="!user.google" class="label label-info">Normal</label>
+                            </td>
+                            <td>
+                                <button (click)="saveUser(user)" class="btn btn-primary" title="save"><i class="fa fa-save"></i></button> &nbsp;
+                                <button (click)="removeUser(user)" class="btn btn-danger" type="button" title="remove"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+                <button *ngIf="!searcherName" (click)="changeFrom(-5)" [disabled]="disablePrevious" class="btn btn-secondary">Previous</button> &nbsp;
+                <button *ngIf="!searcherName" (click)="changeFrom(5)" [disabled]="disableNext" class="btn btn-secondary">Next</button>
+            </div>
+        </div>
+    </div>
+</div>
