@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UploadFileService } from '../../services/upload/upload-file.service';
 import { ModalUploadService } from './modal-upload.service';
 
@@ -9,7 +9,7 @@ import { ModalUploadService } from './modal-upload.service';
 })
 export class ModalUploadComponent implements OnInit {
   @ViewChild('inputUploadFile') inputUploadFile: ElementRef;
-  uploadImage = File;
+  uploadImage: File;
   tempImage: any;
 
   constructor(
@@ -56,7 +56,11 @@ export class ModalUploadComponent implements OnInit {
   isUploadDisabled() {
     const uploadCurrentImage: any = this.uploadImage;
 
-    if ( uploadCurrentImage === null ||  uploadCurrentImage.size === null || uploadCurrentImage.size === undefined) {
+    if (uploadCurrentImage == null) {
+      return true;
+    }
+
+    if (uploadCurrentImage.size === null || uploadCurrentImage.size === undefined) {
       return true;
     }
 

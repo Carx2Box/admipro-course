@@ -8,7 +8,6 @@ export class IncrementerComponent implements OnInit {
   @Input('nombre') legend: string = 'Leyenda';
   @Input() progress: number = 50;
   @Output('changeValue') changeValueEvent: EventEmitter<number> = new EventEmitter();
-  // Link with Dom components
   @ViewChild('txtProgress') txtProgress: ElementRef;
   constructor() {
   }

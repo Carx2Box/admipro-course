@@ -15,7 +15,7 @@
 
                     <br>
                     <br>
-                    <input #inputUploadFile (change)="selectionImage( $event.target.files[0] )" type="file">
+                    <input type="file" #inputUploadFile (change)="selectionImage( $event.target.files[0] )">
                 </div>
                 <div class="modal-footer">
                     <button (click)="changeImage()" [disabled]="isUploadDisabled()" type="button" class="btn btn-primary">Upload image</button>

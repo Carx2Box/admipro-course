@@ -1,0 +1,76 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-10">
+                        <input #input (keyup)="searchHospital( input.value)" type="text" class="form-control" placeholder="Search hospitals...">
+                    </div>
+
+                    <div class="col-2">
+                        <button type="button" class="btn btn-danger" (click)="input.value = null; searchHospital( input.value) ">  Clean </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="loadingPage">
+    <div class="col-12">
+        <div class="alert alert-warning text-center">
+            <strong>Loading</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor.</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="row" *ngIf="!loadingPage">
+    <div class="col-12">
+
+
+        <div class="card">
+            <div class="card-body">
+
+                <div class="text-right">
+                    <button (click)="createHospital()" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                        <i class="fa fa-plus"> </i> Create Hospital
+                    </button>
+                </div>
+                <h3 class="card-title"> Registered Hospitals ( <small>{{this.totalRecords}}</small>) </h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let hospital of hospitals">
+                            <td class="w70"> <img (click)="showModal( hospital._id)" [src]="hospital.img | image:'hospitals' " alt="" class="w70 img-circle pointer"> </td>
+                            <td class="align-middle">
+                                <input type="text" maxlength="100" [(ngModel)]="hospital.name" class="form-control" required place="Hospital name ...">
+                            </td>
+
+                            <td class="align-middle">
+                                <button (click)="saveHospital(hospital)" class="btn btn-primary" title="save"><i class="fa fa-save"></i></button> &nbsp;
+                                <button (click)="removeHospital(hospital)" class="btn btn-danger" type="button" title="remove"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+                <button *ngIf="!searcherName" (click)="changeFrom(-5)" [disabled]="disablePrevious" class="btn btn-secondary">Previous</button> &nbsp;
+                <button *ngIf="!searcherName" (click)="changeFrom(5)" [disabled]="disableNext" class="btn btn-secondary">Next</button>
+
+            </div>
+        </div>
+    </div>
+</div>

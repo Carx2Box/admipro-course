@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
 
     // Alert for no check the conditions.
     if (!this.forma.value.conditions) {
-      swal("Important", " You must click in the conditions!", "warning");
+      swal('Important', 'You must click in the conditions!', 'warning');
       return;
     }
 
@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
 
     this.userService.createUser(userAdd)
       .subscribe(resp => {
-        swal("Ok", "The user was generated correctly!", "success")
+        swal('Ok', 'The user was generated correctly!', 'success')
           .then(value => { this.router.navigate(['/login']); }
           );
       });
