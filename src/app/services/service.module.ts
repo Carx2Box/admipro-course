@@ -14,7 +14,8 @@ import {
   UploadFileService,
   AdminGuard
  } from './service.index';
- 
+import { ErrorService } from './error/error.service';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -30,7 +31,8 @@ import {
     LoginGuardGuard,
     AdminGuard,
     UploadFileService,
-    ModalUploadService
+    ModalUploadService,
+    ErrorService,
   ],
   declarations: []
 })

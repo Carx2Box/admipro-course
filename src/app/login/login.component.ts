@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { User } from '../models/user.model';
 import { UserService } from '../services/service.index';
-import { GOOGLE_CLIENT_ID } from '../config/config';
+import { GOOGLE_CLIENT_ID, LOGIN_ERROR_TITLE } from '../config/config';
+import { ErrorService } from '../services/error/error.service';
 
 declare function init_plugins();
 declare const gapi: any;
@@ -18,7 +19,10 @@ export class LoginComponent implements OnInit {
   rememberpass: boolean = false;
   auth2: any;
 
-  constructor(public userService: UserService, private router: Router) {}
+  constructor(
+    public userService: UserService,
+    public errorService: ErrorService,
+    private router: Router) {}
 
   ngOnInit() {
     init_plugins();
@@ -46,7 +50,9 @@ export class LoginComponent implements OnInit {
       const token = googleUser.getAuthResponse().id_token;
       this.userService
         .loginGoogle(token)
-        .subscribe(() => (window.location.href = '#/dashboard'));
+        .subscribe(
+          () => (window.location.href = '#/dashboard'),
+          (error) => this.errorService.showError(LOGIN_ERROR_TITLE, error.error.message) );
     });
   }
 
@@ -59,6 +65,8 @@ export class LoginComponent implements OnInit {
 
     this.userService
       .login(user, this.rememberpass)
-      .subscribe(correct => this.router.navigate(['/dashboard']));
+      .subscribe(
+         () => this.router.navigate(['/dashboard']),
+         (error) =>  this.errorService.showError(LOGIN_ERROR_TITLE, error.error.message) );
   }
 }

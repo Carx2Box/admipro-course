@@ -18,7 +18,7 @@ import { ModalUploadService } from 'src/app/components/modal-upload/modal-upload
   templateUrl: './medic.component.html',
   styles: []
 })
-export class MedicComponent implements OnInit {  
+export class MedicComponent implements OnInit {
   loadingPage: boolean = false;
   hospitals: Hospital[] = [];
   doctor: Doctor = new Doctor('', '', '', '');
@@ -34,11 +34,11 @@ export class MedicComponent implements OnInit {
   ngOnInit() {
 
     this.loadingPage = true;
-    this.activatedRouter.params.subscribe(params=> {
-      const doctorId = params['id'];     
+    this.activatedRouter.params.subscribe(params => {
+      const doctorId = params['id'];
       if (doctorId !== 'new') {
         this.doctorService.retrieveDoctor(doctorId)
-          .subscribe((resp: any)=>  {
+          .subscribe((resp: any) =>  {
             this.doctor =  new Doctor(resp.doctor.name, resp.doctor.hospital._id, resp.doctor.img, resp.doctor._id, resp.doctor.user);
             this.loadHospital(resp.doctor.hospital._id);
             this.loadingPage = false;
@@ -55,8 +55,8 @@ export class MedicComponent implements OnInit {
     this.modalUploadService.showModal('doctors', id);
 
     this.modalUploadService.notification
-      .subscribe( res => {      
-        this.doctor.img = res.doctor.img;        
+      .subscribe( res => {
+        this.doctor.img = res.doctor.img;
       });
   }
 
@@ -73,15 +73,14 @@ export class MedicComponent implements OnInit {
             this.doctor._id = doctor._id;
             this.router.navigate(['/doctor', doctor._id ]);
           });
-        });        
-    }
-    else {
+        });
+    } else {
       this.doctorService.updateDoctor(this.doctor)
-        .subscribe(doctor=>  {
+        .subscribe(doctor =>  {
           swal('Updated doctor', doctor.name, 'success' ).then( res => {
-            this.doctor._id = doctor._id;            
+            this.doctor._id = doctor._id;
           });
-        })        
+        });
     }
   }
 
@@ -100,10 +99,10 @@ export class MedicComponent implements OnInit {
     }
 
     const hospitalId = event.target.value;
-    this.loadHospital(hospitalId);    
+    this.loadHospital(hospitalId);
   }
 
-  loadHospital(hospitalId: string){
+  loadHospital(hospitalId: string) {
     this.hospitalService.retrieveHospital(hospitalId)
     .subscribe((data: any) => {
       this.hospital = new Hospital(data.name, data.img, data.id);

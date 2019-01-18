@@ -10,6 +10,8 @@ import { UserService } from '../services/service.index';
 
 // Alerts
 import swal from 'sweetalert';
+import { ErrorService } from '../services/error/error.service';
+import { CREATED_USER_ERROR_TITLE } from '../config/config';
 
 declare function init_plugins();
 
@@ -23,6 +25,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     public userService: UserService,
+    public errorService: ErrorService,
     public router: Router) { }
 
   ngOnInit() {
@@ -35,14 +38,6 @@ export class RegisterComponent implements OnInit {
       password2: new FormControl(null, [Validators.required]),
       conditions: new FormControl(false),
     }, { validators: this.isEqual('password', 'password2') });
-
-    // this.forma.setValue({
-    //   name: 'Test',
-    //   email: 'test@test.com',
-    //   password: '123456',
-    //   password2: '123456',
-    //   conditions: true
-    // })
   }
 
   createUser() {
@@ -67,7 +62,12 @@ export class RegisterComponent implements OnInit {
         swal('Ok', 'The user was generated correctly!', 'success')
           .then(value => { this.router.navigate(['/login']); }
           );
-      });
+      },
+      (error => {
+        console.log(error);
+        const errorShow: any = error.error;
+        this.errorService.showError( errorShow.message,  errorShow.errors.message);
+      }));
   }
 
   // Custom validation

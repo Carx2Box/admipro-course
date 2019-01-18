@@ -100,9 +100,6 @@ export class UserService {
         this.user.img = resp.user.img;
         swal('Image updated', this.user.name, 'success');
         this.saveToLocalStorage(id, token, this.user, this.menu);
-      })
-      .catch(resp => {
-        console.log( resp);
       });
   }
 
@@ -128,8 +125,8 @@ export class UserService {
 
     const url =  URL_SERVICES + '/login';
 
-    return this.http.post(url, user).pipe(map((resp: any) => {
-      console.log(resp);
+    return this.http.post(url, user)
+      .pipe(map((resp: any) => {
       this.saveToLocalStorage(resp.id, resp.token, resp.user, resp.menu );
       return true;
     }));
@@ -140,7 +137,7 @@ export class UserService {
     this.user = null;
     this.token = '';
     this.menu = [];
-    
+
     localStorage.removeItem('id');
     localStorage.removeItem('token');
     localStorage.removeItem('user');

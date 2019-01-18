@@ -9,6 +9,7 @@ import { UserService } from '../../services/user/user.service';
 
 // Alert.
 import swal from 'sweetalert';
+import { ErrorService } from '../../services/error/error.service';
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +22,9 @@ export class ProfileComponent implements OnInit {
   uploadImage = File;
   tempImage: any;
 
-  constructor(public userService: UserService) {
+  constructor(
+    public userService: UserService,
+    public errorService: ErrorService) {
     this.user = this.userService.user;
     this.tempImage = null;
   }
@@ -42,7 +45,8 @@ export class ProfileComponent implements OnInit {
         if (resp) {
           swal('User update', resp.name, 'success');
         }
-      });
+      },
+      (error) => this.errorService.showError(error.error.message, error.error.errors.message));
   }
 
   uploaderImage(file) {
