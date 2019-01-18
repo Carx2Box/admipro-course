@@ -27,6 +27,17 @@ export class DoctorService {
     return this.http.get(url);
   }
 
+  retrieveDoctor(id: string) {
+    const url = URL_SERVICES + `/doctor/${id}`;
+
+    return this.http.get(url)
+      .pipe(map((res: any)=> {
+        console.log(res);
+        return res;
+      }))
+    ;
+  }
+
   createDoctor(doctor: Doctor) {
     const url = URL_SERVICES + '/doctor';
     const httpParams = new HttpParams().set('token',  this.userService.token);
@@ -44,7 +55,8 @@ export class DoctorService {
 
   updateDoctor( doctor: Doctor) {
     const url = `${URL_SERVICES}/doctor/${encodeURIComponent(doctor._id)}`;
-    const httpParams = new HttpParams().set('token',  this.userService.token);
+    const httpParams = new HttpParams().set('token',  this.userService.token);  
+    doctor.user = this.userService.user._id;
 
     return this.http.put(url, doctor, { params: httpParams}).pipe(map((resp: any) =>  {
       return resp.doctor;

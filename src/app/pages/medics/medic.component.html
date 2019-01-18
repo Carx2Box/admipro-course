@@ -1,8 +1,19 @@
-<div class="row animated fadeIn">
+<div *ngIf="loadingPage" class="row animated fadeIn">
+    <div class="col-12">
+        <div class="alert alert-warning text-center">
+            <strong>Loading</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor.</span>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!loadingPage" class="row animated fadeIn">
     <div class="col-md-6">
         <div class="card card-body">
-            <h3 class="box-title m-b-0">Doctor: NAME__MEDIC</h3>
-            <p class="text-muted m-b-30 font-13"> Bootstrap Elements </p>
+            <h3 class="box-title m-b-0">Doctor: {{ doctor.name}}</h3>
             <div class="row">
                 <div class="col-sm-12 col-xs-12">
                     <form #f="ngForm" ngNativeValidate (ngSubmit)="saveDoctor(f)">
@@ -37,7 +48,7 @@
         <div class="card card-body">
             <h4 class="box-title m-b-0">Photo</h4>
 
-            <img [src]="doctor.img | image:'doctor'" class="w70 img-circle">
+            <img (click)="showModal( doctor._id)" [src]="doctor.img | image:'doctors'" class="w70 img-circle pointer">
         </div>
     </div>
 </div>
