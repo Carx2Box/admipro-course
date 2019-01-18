@@ -5,16 +5,8 @@ import { ModalUploadService } from '../components/modal-upload/modal-upload.serv
 import { HospitalService } from './hospital/hospital.service';
 import { DoctorService } from './doctor/doctor.service';
 
-import {
-  SettingsService,
-  SidebarService,
-  SharedService,
-  UserService,
-  LoginGuardGuard,
-  UploadFileService,
-  AdminGuard
- } from './service.index';
-import { ErrorService } from './error/error.service';
+// tslint:disable-next-line:max-line-length
+import { SettingsService, SidebarService, SharedService, UserService, LoginGuardGuard, UploadFileService,  AdminGuard, ErrorService } from './service.index';
 
 @NgModule({
   imports: [
