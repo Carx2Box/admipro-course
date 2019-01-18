@@ -11,7 +11,6 @@ import { DoctorService } from '../../services/doctor/doctor.service';
 
 import swal from 'sweetalert';
 import { Router, ActivatedRoute } from '@angular/router';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
 import { ModalUploadService } from 'src/app/components/modal-upload/modal-upload.service';
 
 @Component({
@@ -51,7 +50,7 @@ export class MedicComponent implements OnInit {
 
     this.loadHospitals();
   }
-    
+
   showModal(id: string) {
     this.modalUploadService.showModal('doctors', id);
 

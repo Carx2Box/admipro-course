@@ -28,6 +28,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { HospitalsComponent } from './hospitals/hospitals.component';
 import { MedicsComponent } from './medics/medics.component';
 import { MedicComponent } from './medics/medic.component';
+import { FinderComponent } from './finder/finder.component';
 
 @NgModule({
     declarations: [
@@ -45,7 +46,8 @@ import { MedicComponent } from './medics/medic.component';
         ModalUploadComponent,
         HospitalsComponent,
         MedicsComponent,
-        MedicComponent
+        MedicComponent,
+        FinderComponent
     ],
     exports: [
         DashboardComponent,

@@ -8,6 +8,7 @@ declare function init_plugins();
   styles: []
 })
 export class NopagefoundComponent implements OnInit {
+  anio:number = new Date().getFullYear();
 
   constructor() { }
 

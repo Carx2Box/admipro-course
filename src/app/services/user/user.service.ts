@@ -19,6 +19,7 @@ import { UploadFileService } from '../upload/upload-file.service';
 export class UserService {
   user: User;
   token: string;
+  menu: any = [];
 
   constructor(private http: HttpClient,
     private router: Router,
@@ -83,7 +84,7 @@ export class UserService {
     return this.http.put(url, user, { params: httpParams}).pipe(map((resp: any) =>  {
 
       if (user._id === this.user._id) {
-        this.saveToLocalStorage(user._id, token, user);
+        this.saveToLocalStorage(user._id, token, user, this.menu);
       }
       return resp.user;
     }));
@@ -98,7 +99,7 @@ export class UserService {
       .then( (resp: any) =>  {
         this.user.img = resp.user.img;
         swal('Image updated', this.user.name, 'success');
-        this.saveToLocalStorage(id, token, this.user);
+        this.saveToLocalStorage(id, token, this.user, this.menu);
       })
       .catch(resp => {
         console.log( resp);
@@ -109,7 +110,8 @@ export class UserService {
   loginGoogle(token: string) {
     const url = URL_SERVICES + '/login/google' ;
     return this.http.post(url, {token: token}).pipe(map((resp: any) => {
-      this.saveToLocalStorage(resp.id, resp.token, resp.user);
+      console.log(resp);
+      this.saveToLocalStorage(resp.id, resp.token, resp.user, resp.menu);
       localStorage.removeItem('email');
       return true;
     }));
@@ -127,7 +129,8 @@ export class UserService {
     const url =  URL_SERVICES + '/login';
 
     return this.http.post(url, user).pipe(map((resp: any) => {
-      this.saveToLocalStorage(resp.id, resp.token, resp.user);
+      console.log(resp);
+      this.saveToLocalStorage(resp.id, resp.token, resp.user, resp.menu );
       return true;
     }));
   }
@@ -136,20 +139,25 @@ export class UserService {
   logout() {
     this.user = null;
     this.token = '';
-
+    this.menu = [];
+    
     localStorage.removeItem('id');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('menu');
+
     this.router.navigate(['/login']);
   }
 
   // Save to tocalstorage the information of Login
-  private saveToLocalStorage(id, token, user) {
+  private saveToLocalStorage(id, token, user, menu) {
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('menu', JSON.stringify(menu));
     this.user = user;
     this.token = token;
+    this.menu = menu;
   }
 
   // Load from local Storage
@@ -157,9 +165,11 @@ export class UserService {
     if (localStorage.getItem('token')) {
       this.token = localStorage.getItem('token');
       this.user  = JSON.parse(localStorage.getItem('user'));
+      this.menu  = JSON.parse(localStorage.getItem('menu'));
     } else {
       this.token = '';
       this.user = null;
+      this.menu = [];
     }
   }
 }

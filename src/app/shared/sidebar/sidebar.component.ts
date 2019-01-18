@@ -15,7 +15,7 @@ export class SidebarComponent implements OnInit {
      ) { }
 
   ngOnInit() {
+    this._sidebar.cargarMenu();
   }
 
 }
-
