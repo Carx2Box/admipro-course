@@ -6,7 +6,8 @@ import { HospitalService } from './hospital/hospital.service';
 import { DoctorService } from './doctor/doctor.service';
 
 // tslint:disable-next-line:max-line-length
-import { SettingsService, SidebarService, SharedService, UserService, LoginGuardGuard, UploadFileService,  AdminGuard, ErrorService } from './service.index';
+import { SettingsService, SidebarService, SharedService, UserService, UploadFileService, ErrorService } from './service.index';
+import { LoginGuardGuard, AdminGuard, ChecktokenGuard } from './service.index';
 
 @NgModule({
   imports: [
@@ -20,11 +21,12 @@ import { SettingsService, SidebarService, SharedService, UserService, LoginGuard
     UserService,
     HospitalService,
     DoctorService,
-    LoginGuardGuard,
-    AdminGuard,
-    UploadFileService,
     ModalUploadService,
     ErrorService,
+    UploadFileService,
+    LoginGuardGuard,
+    AdminGuard,
+    ChecktokenGuard
   ],
   declarations: []
 })

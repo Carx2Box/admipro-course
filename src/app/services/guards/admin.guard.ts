@@ -15,11 +15,10 @@ export class AdminGuard implements CanActivate {
   constructor(
     public userService: UserService,
     public router: Router
-  ){
-
+  ) {
   }
+
   canActivate() {
-    
     if (this.userService.user.role === ADMIN_ROLE) {
       return true;
     }

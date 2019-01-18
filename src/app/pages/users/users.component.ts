@@ -28,7 +28,7 @@ export class UsersComponent implements OnInit {
 
     this.modalUploadService.notification
       .subscribe( res => {
-        console.log(res);
+        // console.log(res);
         const userSelected: User = this.users.find(user => user._id === res.user._id);
         if (userSelected) {
           userSelected.img = res.user.img;
@@ -84,7 +84,7 @@ export class UsersComponent implements OnInit {
         this.users = users;
         this.loadingPage = false;
       },  error => {
-        console.log(error);
+        // console.log(error);
       });
   }
 

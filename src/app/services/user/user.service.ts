@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
+
+//  Rxjs
 import { map } from 'rxjs/internal/operators/map';
-import swal from 'sweetalert';
+import { catchError } from 'rxjs/operators';
 
 // Models
 import { User } from 'src/app/models/user.model';
 
-// Configuration
+// Configuration/ Services
 import { URL_SERVICES } from 'src/app/config/config';
-
-// Maps component
 import { UploadFileService } from '../upload/upload-file.service';
+import { ErrorService } from '../error/error.service';
+
+// Alerts
+import swal from 'sweetalert';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +26,24 @@ export class UserService {
   token: string;
   menu: any = [];
 
-  constructor(private http: HttpClient,
+  constructor(
+    private http: HttpClient,
     private router: Router,
+    private errorService: ErrorService,
     public uploadFileService: UploadFileService ) {
     this.loadFromLocalStorage();
+  }
+
+  renewToken() {
+    const url = URL_SERVICES + '/login/renewtoken';
+    const httpParams = new HttpParams().set('token',  this.token);
+
+    return this.http.get(url, { params: httpParams})
+      .pipe(map((resp: any) =>  {
+        this.token = resp.token;
+        localStorage.setItem('token', this.token);
+        return true;
+      }));
   }
 
   // Is Logged
@@ -107,7 +126,7 @@ export class UserService {
   loginGoogle(token: string) {
     const url = URL_SERVICES + '/login/google' ;
     return this.http.post(url, {token: token}).pipe(map((resp: any) => {
-      console.log(resp);
+      // console.log(resp);
       this.saveToLocalStorage(resp.id, resp.token, resp.user, resp.menu);
       localStorage.removeItem('email');
       return true;

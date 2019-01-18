@@ -37,7 +37,7 @@ export class MedicsComponent implements OnInit {
 
     this.modalUploadService.notification
       .subscribe( res => {
-        console.log(res);
+        // console.log(res);
         const doctorSelected: Doctor = this.doctors.find(doctor => doctor._id === res.doctor._id);
         if (doctorSelected) {
           doctorSelected.img = res.doctor.img;
@@ -109,7 +109,7 @@ export class MedicsComponent implements OnInit {
   }
 
   editDoctor(doctor: Doctor) {
-    console.log(doctor);
+    // console.log(doctor);
   }
 
   removeDoctor(doctor: Doctor) {

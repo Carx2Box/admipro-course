@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
           );
       },
       (error => {
-        console.log(error);
+        // console.log(error);
         const errorShow: any = error.error;
         this.errorService.showError( errorShow.message,  errorShow.errors.message);
       }));

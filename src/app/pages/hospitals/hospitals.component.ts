@@ -87,7 +87,7 @@ export class HospitalsComponent implements OnInit {
 
     this.modalUploadService.notification
       .subscribe( res => {
-        console.log(res);
+        // console.log(res);
         const hospitalSelected: Hospital = this.hospitals.find(hospital => hospital._id === res.hospital._id);
         if (hospitalSelected) {
           hospitalSelected.img = res.hospital.img;
@@ -96,7 +96,7 @@ export class HospitalsComponent implements OnInit {
   }
 
   saveHospital(hospital: Hospital) {
-    console.log(hospital);
+    // console.log(hospital);
     if (hospital.name === '') {
         swal('Can not update hospital', 'The name of the hospital is required.', 'error');
         return;

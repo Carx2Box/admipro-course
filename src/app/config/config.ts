@@ -5,4 +5,5 @@ export const ADMIN_ROLE = 'ADMIN_ROLE';
 
 export const LOGIN_ERROR_TITLE = 'Login error';
 export const CREATED_USER_ERROR_TITLE = 'Error create user';
+export const RENEW_TOKEN_HOUR = 1;
 

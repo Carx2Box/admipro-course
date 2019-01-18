@@ -25,10 +25,10 @@ export class FinderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadingPage=true;
-    this.activatedRoute.params      
-        .subscribe(params => {                    
-          this.search(params['term']);          
+    this.loadingPage = true;
+    this.activatedRoute.params
+        .subscribe(params => {
+          this.search(params['term']);
         });
   }
 
@@ -36,8 +36,8 @@ export class FinderComponent implements OnInit {
     const url = URL_SERVICES + `/search/all/${term}`;
 
     this.http.get(url)
-      .subscribe((response: any)=> {
-        console.log(response);
+      .subscribe((response: any) => {
+        // console.log(response);
         this.hospitals = response.hospitals;
         this.users = response.users;
         this.doctors = response.doctors;

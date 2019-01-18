@@ -68,7 +68,7 @@ export class MedicComponent implements OnInit {
     if (this.doctor._id === '') {
       this.doctorService.createDoctor(this.doctor)
         .subscribe(doctor => {
-          console.log(doctor);
+          // console.log(doctor);
           swal('Created doctor', doctor.name, 'success' ).then( res => {
             this.doctor._id = doctor._id;
             this.router.navigate(['/doctor', doctor._id ]);

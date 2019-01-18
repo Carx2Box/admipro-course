@@ -16,7 +16,7 @@ export class LoginGuardGuard implements CanActivate {
     const activate: boolean = this.userService.isLogged();
 
     if (!activate) {
-      console.log('Page guard.');
+      // console.log('Page guard.');
       this.router.navigate(['/login']);
     }
 
